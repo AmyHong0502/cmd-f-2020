@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-function Album() {
+function App() {
   const classes = useStyles();
 
   return (
@@ -135,14 +135,6 @@ function Album() {
         </Container>
       </main>
       <Footer />
-    </>
-  );
-}
-
-function App() {
-  return (
-    <>
-      <Album />
     </>
   );
 }
