@@ -1,9 +1,9 @@
 import React from "react";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Main from "./components/main/main";
-import MainAppBar from "./components/mainappbar/mainappbar";
-import Footer from "./components/footer/footer";
+import Main from "./components/main/Main";
+import MainAppBar from "./components/navigation/AppBar";
+import Footer from "./components/footer/Footer";
 
 import "./App.css";
 
