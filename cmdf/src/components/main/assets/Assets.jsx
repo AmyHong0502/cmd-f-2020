@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Records from './../history/RecordsTable';
+import Grid from './AssetsGrid';
 
 const useStyles = makeStyles({
     table: {
@@ -13,7 +13,7 @@ export default function History() {
 
     return (
         <React.Fragment>
-            <Records />
+            <Grid />
         </React.Fragment>
     );
 }

@@ -98,7 +98,7 @@ export default function Main(props) {
 
   return (
     <main>
-      <AppBar handleSelectedTab={handleSelectedTab} />
+      <AppBar selectedTab={selectedTab} handleSelectedTab={handleSelectedTab} />
       <Paper className={classes.cardGrid}>
         <Content selectedTab={selectedTab} />
       </Paper>

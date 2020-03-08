@@ -14,16 +14,16 @@ const useStyles = makeStyles({
     },
 });
 
-function createData(name, calories, fat, carbs, protein) {
-    return { name, calories, fat, carbs, protein };
+function createData(transaction, date, amount, category) {
+    return { transaction, date, amount, category };
 }
 
 const rows = [
-    createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-    createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-    createData('Eclair', 262, 16.0, 24, 6.0),
-    createData('Cupcake', 305, 3.7, 67, 4.3),
-    createData('Gingerbread', 356, 16.0, 49, 3.9),
+    createData('Buy textbook', 'March 7, 2020', 200.00, 24, 'School'),
+    createData('Donate at the local Foodbank', 'March 7, 2020', 35.00, 'Donation'),
+    createData('Eat out at Marutama Ramen', 'March 7, 2020', 12.35, 'Food'),
+    createData('Grocery shopping at Save on Foods', 'March 7, 2020', 24.55, 'Food'),
+    createData('Salary income', 'March 7, 2020', 1070.49, 'Income'),
 ];
 
 export default function Records() {
@@ -34,23 +34,21 @@ export default function Records() {
             <Table className={classes.table} aria-label="simple table">
                 <TableHead>
                     <TableRow>
-                        <TableCell>Dessert (100g serving)</TableCell>
-                        <TableCell align="right">Calories</TableCell>
-                        <TableCell align="right">Fat&nbsp;(g)</TableCell>
-                        <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-                        <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                        <TableCell>Transaction</TableCell>
+                        <TableCell>Date</TableCell>
+                        <TableCell>Amount (CAD)</TableCell>
+                        <TableCell>Category</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {rows.map(row => (
-                        <TableRow key={row.name}>
+                    {rows.map((row, i) => (
+                        <TableRow key={i}>
                             <TableCell component="th" scope="row">
-                                {row.name}
+                                {row.transaction}
                             </TableCell>
-                            <TableCell align="right">{row.calories}</TableCell>
-                            <TableCell align="right">{row.fat}</TableCell>
-                            <TableCell align="right">{row.carbs}</TableCell>
-                            <TableCell align="right">{row.protein}</TableCell>
+                            <TableCell>{row.date}</TableCell>
+                            <TableCell>{`$${row.amount}`}</TableCell>
+                            <TableCell>{row.category}</TableCell>
                         </TableRow>
                     ))}
                 </TableBody>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Records from './RecordsTable';
+import Table from './RecordsTable';
 
 const useStyles = makeStyles({
     table: {
@@ -13,7 +13,7 @@ export default function History() {
 
     return (
         <React.Fragment>
-            <Records />
+            <Table />
         </React.Fragment>
     );
 }

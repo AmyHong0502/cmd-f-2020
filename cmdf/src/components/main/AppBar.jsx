@@ -13,20 +13,12 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
-import RedeemRoundedIcon from '@material-ui/icons/RedeemRounded';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProgressChart from '../navigation/ProgressChart';
 
 const drawerWidth = 300;
-
-const icons = [
-  { name: 'Dashboard', icon: 'dashboard_rounded' },
-  { name: 'Assets', icon: 'emoji_events_rounded' },
-  { name: 'History', icon: 'equalizer_rounded' },
-];
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -98,6 +90,12 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const icons = [
+  { name: 'Dashboard', icon: 'dashboard_rounded' },
+  { name: 'Assets', icon: 'emoji_events_rounded' },
+  { name: 'History', icon: 'equalizer_rounded' },
+];
+
 const ProgressBar = (props) => {
   return (
     <div style={{ display: 'flex', margin: '10px 0', }}>
@@ -119,7 +117,7 @@ const Bar = (props) => {
   return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
 }
 
-export default function MainAppBar({ handleSelectedTab }) {
+export default function MainAppBar({ selectedTab, handleSelectedTab }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -152,7 +150,7 @@ export default function MainAppBar({ handleSelectedTab }) {
             <MenuIcon />
           </IconButton>
           <Typography component="h1" variant="h6" noWrap className={classes.title}>
-            Dashboard
+            {icons[selectedTab].name}
           </Typography>
           <IconButton>
             <Icon className="fas fa-coins" style={{ color: 'orange' }} />
