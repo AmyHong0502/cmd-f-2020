@@ -141,34 +141,9 @@ export default function Main(props) {
       <AppBar signOut={props.handleSignOut} />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
-          {/* <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6">Income</Typography>
-            <Paper className={classes.paper}>
-              {incomes.map(({ task, amount }) => (
-                <IncomeItem task={task} amount={amount} />
-              ))}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6">Expense</Typography>
-            <Paper className={classes.paper}>
-              {expenses.map(({ name, spend }) => (
-                <ExpenseItem name={name} spend={spend}/>
-              ))}
-            </Paper>
-          </Grid>
-          <Grid item xs={12} sm={6} md={4}>
-            <Typography variant="h6">Mission</Typography>
-            <Paper className={classes.paper}>
-              {quizzes.map(({ mission }) => (
-                <ContainedCardHeader mission={mission} />
-              ))}
-            </Paper>
-          </Grid> */}
           {cards.map((card, i) => (
             <Grid item key={i} xs={12} sm={6} md={4}>
               <Typography variant="h6">{card.title}</Typography>
-              {/* <Paper className={classes.paper}></Paper> */}
               <CardList {...card}/>
             </Grid>
           ))}
