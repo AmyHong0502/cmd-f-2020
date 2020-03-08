@@ -64,7 +64,7 @@ export default function Main(props) {
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
-  const { userSession } = props;
+  const userData = props.userSession.loadUserData();
 
   const toggleUp = () => {
     setUp(!up);
@@ -147,7 +147,7 @@ export default function Main(props) {
   return (
     <>
       <main>
-        <AppBar username={props.username} signOut={props.handleSignOut} />
+        <AppBar userSession={props.userSession} signOut={props.handleSignOut} />
         <Paper className={classes.cardGrid}>
           <Grid container justify="center" spacing={8}>
             {cards.map((card, i) => (
