@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import CameraIcon from "@material-ui/icons/PhotoCamera";
@@ -18,10 +19,16 @@ export default function Navigation() {
   return (
     <AppBar position="relative">
       <Toolbar>
-        <CameraIcon className={classes.icon} />
-        <Typography variant="h6" color="inherit" noWrap>
-          Album layout
-        </Typography>
+        <nav>
+          <Link to="/">
+            <CameraIcon className={classes.icon} />
+            <Typography variant="h6" color="inherit" noWrap>
+              Album layout
+            </Typography>
+          </Link>
+          <Link to="/login">Sign In</Link>
+          <Link to="/register">Sign Up</Link>
+        </nav>
       </Toolbar>
     </AppBar>
   );
