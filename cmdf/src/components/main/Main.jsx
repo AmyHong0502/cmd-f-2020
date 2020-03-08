@@ -57,7 +57,7 @@ export default function Main({userSession = "No User", handleSignOut = () => {}}
   const [tasksOpen, setTasksOpen] = React.useState(false);
   const [incomes, setIncomes] = React.useState([{task:"Add your income!", amount:"0"}]);
   const [expenses, setExpenses] = React.useState([]);
-  const [coins, setCoins] = React.useState([]);
+  const [gems, setGems] = React.useState([]);
   const str = userSession.loadUserData().username;
   const username = str.substring(0, str.length - 14);
   const usersRef = firebase.database().ref("user/"+username);
