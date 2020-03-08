@@ -99,17 +99,17 @@ const icons = [
 
 const ProgressBar = (props) => {
   return (
-    <div style={{ display: 'flex', margin: '10px 0', }}>
+    <div style={{ display: 'flex', margin: '8px 0', }}>
       <div style={{
         position: 'relative',
-        height: 20,
-        width: 350,
+        height: 16,
+        width: 320,
+        background: 'rgba(255, 165, 0, 0.5)', /* orange */
         borderRadius: 50,
-        border: '1px solid #333',
       }}>
         <Bar percentage={props.percentage} />
       </div>
-      <Typography style={{ fontSize: '0.9rem', marginLeft: 10 }}>{`${props.percentage}/100`}</Typography>
+      <span style={{ fontSize: '0.8rem', marginLeft: 8 }}>{`${props.percentage}/100`}</span>
     </div>
   )
 }
