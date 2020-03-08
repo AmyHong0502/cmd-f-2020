@@ -11,6 +11,8 @@ import Slide from '@material-ui/core/Slide';
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "./Dialog";
 import AppBar from "./AppBar";
+import Assets from "./assets/Assets";
+import History from "./history/History";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -30,40 +32,29 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Main() {
+export default function Main(props) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(0);
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
 
-  const toggleUp = () => {
-    setUp(!up);
-  };
+  const toggleUp = () => setUp(!up);
 
-  const handleIncomeOpen = () => {
-    setIncomeOpen(true);
-  };
+  const handleIncomeOpen = () => setIncomeOpen(true);
 
-  const handleExpenseOpen = () => {
-    setExpenseOpen(true);
-  };
+  const handleExpenseOpen = () => setExpenseOpen(true);
 
-  const handleTasksOpen = () => {
-    setTasksOpen(true);
-  };
+  const handleTasksOpen = () => setTasksOpen(true);
 
-  const handleIncomeClose = () => {
-    setIncomeOpen(false);
-  };
+  const handleIncomeClose = () => setIncomeOpen(false);
 
-  const handleExpenseClose = () => {
-    setExpenseOpen(false);
-  };
+  const handleExpenseClose = () => setExpenseOpen(false);
 
-  const handleTasksClose = () => {
-    setTasksOpen(false);
-  };
+  const handleTasksClose = () => setTasksOpen(false);
+
+  const handleSelectedTab = index => setSelectedTab(index);
 
   const cards = [
     {
@@ -83,18 +74,33 @@ export default function Main() {
     },
   ];
 
-  return (
-    <main>
-      <AppBar />
-      <Paper className={classes.cardGrid}>
-        <Grid container justify="center" spacing={8}>
+  const Content = (props) => {
+    const { selectedTab } = props;
+
+    switch (selectedTab) {
+      case 0:
+        return <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (
             <Grid item key={i} xs={12} sm={6} md={4}>
               <Typography variant="h6">{card.title}</Typography>
               <Paper className={classes.paper}></Paper>
             </Grid>
           ))}
-        </Grid>
+        </Grid>;
+      case 1:
+        return <Assets />;
+      case 2:
+        return <History />;
+      default:
+        return <div></div>;
+    }
+  };
+
+  return (
+    <main>
+      <AppBar handleSelectedTab={handleSelectedTab} />
+      <Paper className={classes.cardGrid}>
+        <Content selectedTab={selectedTab} />
       </Paper>
       <Fab className={classes.fab} color="primary" aria-label="add" onClick={toggleUp}>
         <AddRoundedIcon />
@@ -114,9 +120,11 @@ export default function Main() {
           <AttachMoneyRoundedIcon />
         </Fab>
       </Slide>
-      {cards.map((card, i) => (
-        <Dialog key={i} open={card.open} handleClose={card.handleClose} Transition={Transition} type={card.title} />
-      ))}
-    </main>
+      {
+        cards.map((card, i) => (
+          <Dialog key={i} open={card.open} handleClose={card.handleClose} Transition={Transition} type={card.title} />
+        ))
+      }
+    </main >
   );
 }

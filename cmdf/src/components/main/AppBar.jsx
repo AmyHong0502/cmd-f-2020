@@ -119,7 +119,7 @@ const Bar = (props) => {
   return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
 }
 
-export default function MainAppBar() {
+export default function MainAppBar({ handleSelectedTab }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -185,7 +185,7 @@ export default function MainAppBar() {
         </div>
         <List>
           {icons.map((icon, i) => (
-            <ListItem button key={icon.name}>
+            <ListItem button key={icon.name} onClick={() => handleSelectedTab(i)}>
               <ListItemIcon>
                 <Icon>{icon.icon}</Icon>
               </ListItemIcon>
