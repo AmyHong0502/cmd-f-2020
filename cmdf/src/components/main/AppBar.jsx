@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -82,6 +82,8 @@ export default function MainAppBar({
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
+  const [gem, setGem] = React.useState('0');
+  const [money, setMoney] = React.useState('0');
   const username =
     userSession.loadUserData().username == undefined
       ? "No User"
@@ -90,7 +92,14 @@ export default function MainAppBar({
   quizref.on("value", snapshot => {
     console.log(snapshot.val());
   });
-
+  const usersRef = firebase.database().ref("user/"+username);
+  useEffect(() => {
+    usersRef.on('value', snapshot => {
+      if(snapshot.val()!= null)
+       {setMoney(snapshot.val().money);
+        setGem(snapshot.val().gem);}
+    });
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -130,13 +139,13 @@ export default function MainAppBar({
             <Icon className='fas fa-gem' style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant='h6' style={{ marginRight: 12 }} noWrap>
-            250
+            {gem}
           </Typography>
           <IconButton>
             <Icon className='fas fa-wallet' style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant='h6' noWrap>
-            $200.00
+            ${money}
           </Typography>
           <Button
             variant='outlined'
