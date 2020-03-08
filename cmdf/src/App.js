@@ -1,12 +1,8 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Navigation from "./components/navigation/Navigation";
 import Main from "./components/main/Main";
-import Footer from "./components/footer/Footer";
-
-import Register from "./pages/register";
 import Login from "./pages/login";
 
 import { UserSession } from "blockstack";
@@ -16,7 +12,33 @@ import "./App.css";
 
 const userSession = new UserSession({ appConfig });
 
+function ProtectedRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        userSession.isUserSignedIn() ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
+
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userData: undefined
+    } 
+  }
   handleSignIn(e) {
     e.preventDefault();
     userSession.redirectToSignIn();
@@ -27,23 +49,43 @@ class App extends React.Component {
     userSession.signUserOut(window.location.origin);
   }
 
+  componentWillMount() {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then(userData => {
+        if (!userData.username) {
+          throw new Error("This app requires a username.");
+        } else {
+          this.setState({userData})
+          console.warn(userData.username);
+        }
+        window.location = window.location.origin;
+      });
+    }
+  }
+
   render() {
     return (
       <>
         <CssBaseline />
-        <Navigation />
         <Switch>
           <Route
             path="/login"
             exact
             render={props => (
-              <Login {...props} handleSignIn={this.handleSignIn} />
+              <Login
+                {...props}
+                userSession={userSession}
+                handleSignIn={this.handleSignIn}
+              />
             )}
           />
-          <Route path="/register" exact component={Register} />
-          <Route path="/" exact component={Main} />
+          <ProtectedRoute path="/" exact>
+            <Main
+              userSession={userSession}
+              handleSignOut={this.handleSignOut}
+            />
+          </ProtectedRoute>
         </Switch>
-        <Footer />
       </>
     );
   }
