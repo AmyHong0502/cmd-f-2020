@@ -22,6 +22,7 @@ import Assets from "./assets/Assets";
 import History from "./history/History";
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import { popQuiz } from './popup/Popup';
 import "../../styles/main.css";
 
 const useStyles = makeStyles(theme => ({
@@ -177,7 +178,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
         return (
           <Paper className={classes.paper}>
             {missions.map(({ mission }, i) => (
-              <TaskItem key={i} mission={mission} />
+              <TaskItem key={i} mission={mission} popQuiz={popQuiz} />
             ))}
           </Paper>
         );

@@ -7,8 +7,9 @@
     width: 150vwx;
     padding: 10px;
 }
-.myQuiz {
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myQuiz {
     display: flex;
+    flex-grow: 1;
     justify-content: center;
     font-size: large;
     font-weight: 700;
@@ -20,13 +21,13 @@
     transition: 0.25s;
     padding: 10px;
 }
-.myQuiz:hover{
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myQuiz:hover{
     background-color:orange;
     box-shadow: 2px 2px black;
 }
-.myMission {
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myMission {
     display: flex;
-    justify-content: space-between;
+    flex-grow: 1;
     margin-left: 10px;
     align-items: center;
     color: white;
@@ -39,7 +40,7 @@
     transition: 0.25s;
     padding: 10px;
 }
-.myMission:hover{
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myMission:hover{
     background-color:orange;
     box-shadow: 2px 2px black;
 }
