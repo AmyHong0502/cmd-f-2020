@@ -43,8 +43,7 @@ export default function Assets() {
                         alignSelf: 'center'
                     }} />
                 </Paper>
-            )
-            }
+            )}
         </div >
     );
 }
