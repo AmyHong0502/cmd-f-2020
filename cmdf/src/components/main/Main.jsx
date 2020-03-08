@@ -9,7 +9,9 @@ import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import Slide from "@material-ui/core/Slide";
 import { makeStyles } from "@material-ui/core/styles";
-import ContainedCardHeader from "./Card";
+import Button from "@material-ui/core/Button";
+import MuiAlert from '@material-ui/lab/Alert';
+import Snackbar from "@material-ui/core/Snackbar";
 import IncomeItem from "../incomeItem/IncomeItem";
 import ExpenseItem from "../incomeItem/ExpenseItem";
 import Footer from "../footer/Footer";
@@ -48,6 +50,10 @@ const expenses = [
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
 
 export default function Main({ userSession = "No User", handleSignOut = () => { } }) {
   const classes = useStyles();
@@ -57,10 +63,10 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
   const [incomes, setIncomes] = React.useState([]);
+  const [alert, setAlert] = React.useState(true);
   const str = userSession.loadUserData().username
   const username = str.substring(0, str.length - 14);
   const usersRef = firebase.database().ref("user/" + username);
-
 
   // usersRef.child(username).set({
   //   income: [
@@ -122,7 +128,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
               <br><h3>We\'ll make sure you get there💪</h3>
             `,
           confirmButtonText: 'Lovely!'
-        })
+        }).then(() => setAlert(false));
       }
     });
   }, []);
@@ -263,6 +269,12 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
             type={card.title}
           />
         ))}
+        <Snackbar open={!alert} autoHideDuration={6000} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+          <Alert severity="success">
+            Daily check-in
+            <Button onClick={() => setAlert(true)} variant="outlined" style={{ color: 'white', borderColor: 'white', marginLeft: 20 }}>Dismiss</Button>
+          </Alert>
+        </Snackbar>
       </main>
       <Footer />
     </>
