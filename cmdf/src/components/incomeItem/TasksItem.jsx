@@ -14,11 +14,21 @@ const TaskItem = props => {
   const { mission } = props;
   const classes = useStyles();
   return (
-    <Grid container className={classes.header} spacing={2}>
-      <Grid item xs={6} className='myQuiz'>
+    <Grid container className={classes.header}>
+      <Grid
+        item
+        xs={5}
+        style={{ margin: '8px', padding: '-10px;' }}
+        className='myQuiz'
+      >
         Daily Quiz
       </Grid>
-      <Grid item xs={6} className='myMission'>
+      <Grid
+        item
+        xs={5}
+        style={{ margin: '8px', padding: '-10px' }}
+        className='myMission'
+      >
         Daily Mission
       </Grid>
     </Grid>
