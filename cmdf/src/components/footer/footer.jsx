@@ -23,7 +23,9 @@ export default function Footer() {
         color="textSecondary"
         component="p"
       >
-        TODO get from siteConfig
+        Happy Gaming!
+        <br />
+        Built with ❤️ at cmd-f 2020
       </Typography>
     </footer>
   );
