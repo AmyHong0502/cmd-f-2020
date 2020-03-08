@@ -17,6 +17,7 @@ import Dialog from "./Dialog";
 import AppBar from "./AppBar";
 import TaskItem from "../incomeItem/TasksItem";
 import Assets from "./assets/Assets";
+import gifs from "./assets/AssetsGrid";
 import History from "./history/History";
 import firebase from '../../firebase';
 
@@ -39,10 +40,6 @@ const missions = [
   {
     mission: ["Quiz", "Mission"]
   }
-];
-const expenses = [
-  { name: "buy math textbook", spend: 100 },
-  { name: "buy a hoodie", spend: 50 }
 ];
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
@@ -106,10 +103,12 @@ export default function Main({userSession = "No User", handleSignOut = () => {}}
           income: [{task:"Welcome!", amount:"0"}],
           expense: [{name:"Welcome!", spend:"0"}],
           point: 200,
-          gold: 250
+          gold: 250,
+          avatar: 'pikachu1'
         });
       }
       setIncomes(snapshot.val().income);
+      setExpenses(snapshot.val().expense);
     });
   }, []);
 

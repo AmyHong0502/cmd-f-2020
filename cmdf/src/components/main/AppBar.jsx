@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect }  from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
@@ -19,8 +19,23 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ProgressChart from '../navigation/ProgressChart';
 import ProgressBar from '../progressBar/ProgressBar';
 import firebase from '../../firebase';
+import dratini1 from '../../assets/Dratini1.gif';
+import dratini2 from '../../assets/Dratini2.gif';
+import dratini3 from '../../assets/Dratini3.gif';
+import pikachu1 from '../../assets/Pikachu1.gif';
+import pikachu2 from '../../assets/Pikachu2.gif';
+import pikachu3 from '../../assets/Pikachu3.gif';
+import squirtle1 from '../../assets/Squirtle1.gif';
+import squirtle2 from '../../assets/Squirtle2.gif';
+import squirtle3 from '../../assets/Squirtle3.gif';
 
 const drawerWidth = 300;
+
+const gifs = [
+  dratini1, dratini2, dratini3,
+  pikachu1, pikachu2, pikachu3,
+  squirtle1, squirtle2, squirtle3,
+];
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -103,14 +118,22 @@ export default function MainAppBar({ userSession = "No User", handleSignOut, sel
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
+  const [avatar, setAvatar] = React.useState(pikachu2);
   const username =
     userSession.loadUserData().username == undefined
       ? "No User"
-      : userSession.loadUserData().username;
+      : userSession.loadUserData().username.substring(0, userSession.loadUserData().username.length - 14);
   const quizref = firebase.database().ref("quiz");
   quizref.on("value", snapshot => {
     console.log(snapshot.val());
   });
+
+  const usersRef = firebase.database().ref("user/"+username);
+  useEffect(() => {
+    usersRef.on('value', snapshot => {
+      setAvatar(snapshot.val().avatar);
+    });
+  }, []);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -188,10 +211,15 @@ export default function MainAppBar({ userSession = "No User", handleSignOut, sel
       >
         <div className={classes.header}>
           <div className={classes.profile}>
-            <div style={{ width: 150, height: 150, border: '5px solid #ddd' }} />
+            <div style={{ width: 150, height: 150, border: '5px solid #ddd', display: 'flex'}}>
+              <img src={gifs[avatar]} style={{
+                        margin: 'auto',
+                        alignSelf: 'center'
+                    }} />
+            </div>
             <div style={{ margin: '10px 20px', }}>
               <Avatar style={{ background: '#3f51b5' }}>{username.charAt(0).toUpperCase()}</Avatar>
-              <Typography>@{username.substring(0, username.length - 14)} • Level 1 Warrior</Typography>
+              <Typography>@{username} • Level 1 Warrior</Typography>
               <ProgressBar percentage={percentage} />
               <ProgressBar percentage={percentage} />
             </div>
