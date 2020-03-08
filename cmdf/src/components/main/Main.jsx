@@ -30,7 +30,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Main() {
+export default function Main(props) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
   const [incomeOpen, setIncomeOpen] = React.useState(false);
@@ -85,7 +85,7 @@ export default function Main() {
 
   return (
     <main>
-      <AppBar />
+      <AppBar signOut={props.handleSignOut} />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (

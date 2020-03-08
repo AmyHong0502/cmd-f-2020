@@ -120,7 +120,7 @@ const Bar = (props) => {
   return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
 }
 
-export default function MainAppBar() {
+export default function MainAppBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -171,7 +171,13 @@ export default function MainAppBar() {
           <Link to="/login">Sign In</Link>
           <Link to="/register">Sign Up</Link>
 
-          <Button variant="outlined" style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}>Sign Out</Button>
+          <Button
+            variant="outlined"
+            style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}
+            onClick={props.signOut}
+          >
+            Sign Out
+          </Button>
         </Toolbar>
       </AppBar>
       <Drawer
