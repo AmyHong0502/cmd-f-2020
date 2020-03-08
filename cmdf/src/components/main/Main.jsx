@@ -44,17 +44,12 @@ const missions = [
     mission: ["Quiz", "Mission"]
   }
 ];
-const expenses = [
-  { name: "buy math textbook", spend: 100 },
-  { name: "buy a hoodie", spend: 50 }
-];
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
-
 
 export default function Main({ userSession = "No User", handleSignOut = () => { } }) {
   const classes = useStyles();
@@ -66,6 +61,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const [incomes, setIncomes] = React.useState([{ task: "Add your income!", amount: "0" }]);
   const [expenses, setExpenses] = React.useState([]);
   const [coins, setCoins] = React.useState([]);
+  const [gems, setGems] = React.useState([]);
   const [alert, setAlert] = React.useState(true);
   const str = userSession.loadUserData().username;
   const username = str.substring(0, str.length - 14);
@@ -148,10 +144,47 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
           income: [{ task: "Welcome!", amount: "0" }],
           expense: [{ name: "Welcome!", spend: "0" }],
           point: 200,
-          gold: 250
+          gold: 250,
+          avatar: '3'
+        });
+        Swal.mixin({
+          input: 'text',
+          confirmButtonText: 'Next &rarr;',
+          progressSteps: ['1', '2', '3']
+        }).queue([
+          {
+            title: 'Welcome!',
+            html:
+              'It looks like you logged in for the first time!' +
+              '<br>Let\'s get started😉' +
+              '<br><h3>What\'s your name?</h3>',
+          },
+          {
+            title: 'Awesome!',
+            text: 'What\'s your goal?',
+          },
+          {
+            title: 'You\'r almost there!',
+            text: 'How many days do you have?',
+          },
+        ]).then((result) => {
+          if (result.value) {
+            Swal.fire({
+              title: `You\'r all set, ${result.value[0]}!`,
+              html: `
+                  We noted down your new goal: ${result.value[1]}
+                  <br>You have ${result.value[2]} days!
+                  <br><h3>We\'ll make sure you get there💪</h3>
+                `,
+              confirmButtonText: 'Lovely!'
+            }).then(() => setAlert(false));
+          }
         });
       }
-      setIncomes(snapshot.val().income);
+      else{
+        setIncomes(snapshot.val().income);
+        setExpenses(snapshot.val().expense);
+      }
     });
   }, []);
 

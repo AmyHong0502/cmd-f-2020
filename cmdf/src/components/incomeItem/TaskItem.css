@@ -32,13 +32,21 @@
     align-items: center;
     color: white;
 
-    width: 150vwx;
-    font-size: large;
-    font-weight: 700;
-    background-color:rgb(124, 63, 181);
-    border-radius: 5px;
-    transition: 0.25s;
-    padding: 10px;
+  align-items: center;
+  color: white;
+
+  background-color: rgb(124, 63, 181);
+
+  border-radius: 5px;
+  transition: 0.25s;
+  padding: 10px;
+
+  height: 150px;
+}
+.myQuiz:hover,
+.myMission:hover {
+  background-color: orange;
+  box-shadow: 2px 2px black;
 }
 .MuiButtonBase-root.MuiButton-root.MuiButton-text.myMission:hover{
     background-color:orange;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -84,12 +84,13 @@ export default function MainAppBar({
   const [percentage, setPercentage] = React.useState(60);
   const username =
     userSession.loadUserData().username == undefined
-      ? 'No User'
-      : userSession.loadUserData().username;
-  const quizref = firebase.database().ref('quiz');
-  quizref.on('value', snapshot => {
+      ? "No User"
+      : userSession.loadUserData().username.substring(0, userSession.loadUserData().username.length - 14);
+  const quizref = firebase.database().ref("quiz");
+  quizref.on("value", snapshot => {
     console.log(snapshot.val());
   });
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -126,7 +127,7 @@ export default function MainAppBar({
             {icons[selectedTab].name}
           </Typography>
           <IconButton>
-            <Icon className='fas fa-coins' style={{ color: 'orange' }} />
+            <Icon className='fas fa-gem' style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant='h6' style={{ marginRight: 12 }} noWrap>
             250

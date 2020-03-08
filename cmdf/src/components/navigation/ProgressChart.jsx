@@ -16,7 +16,7 @@ export default function ProgressChart({ activeSeriesIndex }) {
         ]
       },
       {
-        label: 'Coins',
+        label: 'Gems',
         data: [
           [0, 30],
           [1, 10],

@@ -16,9 +16,8 @@ const TaskItem = props => {
         <div className="myTask">
             <Button className="myQuiz" onClick={() => popQuiz(quizzes)}>Daily Quiz</Button>
             <Button className="myMission" onClick={() => popQuiz(quizzes)}>Daily Mission</Button>
-            {/* <div className="myMission"> Daily Mission</div> */}
         </div>
     );
+}
 
-};
 export default TaskItem;
