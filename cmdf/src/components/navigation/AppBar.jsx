@@ -48,10 +48,15 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
   },
+  header: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    padding: theme.spacing(8),
+  },
   fab: {
     position: 'fixed',
-    right: '30px',
-    bottom: '30px',
+    right: 30,
+    bottom: 30,
   },
   title: {
     flexGrow: 1,
@@ -97,7 +102,6 @@ const useStyles = makeStyles(theme => ({
   },
   profile: {
     display: 'flex',
-    alignItems: 'center',
   },
 }));
 
@@ -106,14 +110,14 @@ const ProgressBar = (props) => {
     <div style={{ display: 'flex', margin: '10px 0', }}>
       <div style={{
         position: 'relative',
-        height: '20px',
-        width: '350px',
-        borderRadius: '50px',
+        height: 20,
+        width: 350,
+        borderRadius: 50,
         border: '1px solid #333',
       }}>
         <Bar percentage={props.percentage} />
       </div>
-      <Typography style={{ fontSize: '0.9rem', marginLeft: '10px' }}>{`${props.percentage}/100`}</Typography>
+      <Typography style={{ fontSize: '0.9rem', marginLeft: 10 }}>{`${props.percentage}/100`}</Typography>
     </div>
   )
 }
@@ -160,7 +164,7 @@ export default function MainAppBar() {
           <IconButton>
             <FavoriteRoundedIcon style={{ color: 'orange' }} />
           </IconButton>
-          <Typography variant="h6" style={{ marginRight: '12px' }} noWrap>
+          <Typography variant="h6" style={{ marginRight: 12 }} noWrap>
             250
           </Typography>
           <IconButton>
@@ -169,7 +173,7 @@ export default function MainAppBar() {
           <Typography variant="h6" noWrap>
             200.00
           </Typography>
-          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: '10px' }}>Sign Out</Button>
+          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -202,9 +206,9 @@ export default function MainAppBar() {
           [classes.contentShift]: open,
         })}
       >
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className={classes.header}>
           <div className={classes.profile}>
-            <div style={{ width: '150px', height: '150px', border: '5px solid #ddd' }} />
+            <div style={{ width: 150, height: 150, border: '5px solid #ddd' }} />
             <div style={{ margin: '10px 20px', }}>
               <Avatar style={{ background: '#3f51b5' }}>AK</Avatar>
               <Typography>@alice828 • Level 1 Warrior</Typography>
