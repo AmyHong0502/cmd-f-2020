@@ -24,7 +24,8 @@ const IncomeItem = props => {
         ${amount}
         <div>
           <IconButton htmlFor="text-button-file">
-                   <CreateIcon/>   </IconButton>
+            <CreateIcon />
+          </IconButton>
         </div>
       </div>
     </div>

@@ -14,16 +14,15 @@ export default function Footer() {
 
   return (
     <footer className={classes.footer}>
-      <Typography variant="h6" align="center" gutterBottom>
-        Footer
-      </Typography>
       <Typography
         variant="subtitle1"
         align="center"
         color="textSecondary"
         component="p"
       >
-        TODO get from siteConfig
+        Happy Gaming!
+        <br />
+        Built with ❤️ at cmd-f 2020
       </Typography>
     </footer>
   );

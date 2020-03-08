@@ -16,20 +16,21 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ExpenseItem = props => {
-    const { name, spend } = props;
-    return (
-      <div className="myIncomestff">
-        <p className="taskItem"> {name} </p>
-        <div className="amountItem">
-          ${spend}
-          <div>
-            <IconButton htmlFor="text-button-file">
-            <CreateIcon/>   </IconButton>
-          </div>
+  const { name, spend } = props;
+  return (
+    <div className="myIncomestff">
+      <p className="taskItem"> {name} </p>
+      <div className="amountItem">
+        ${spend}
+        <div>
+          <IconButton htmlFor="text-button-file">
+            <CreateIcon />
+          </IconButton>
         </div>
       </div>
-    );
-  };
-  
-  export default ExpenseItem;
-  
+    </div>
+  );
+};
+
+export default ExpenseItem;
+
