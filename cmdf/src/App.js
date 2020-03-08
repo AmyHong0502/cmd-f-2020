@@ -2,7 +2,6 @@ import React from "react";
 import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
-import Navigation from "./components/navigation/Navigation";
 import Main from "./components/main/Main";
 import Footer from "./components/footer/Footer";
 
@@ -31,7 +30,6 @@ class App extends React.Component {
     return (
       <>
         <CssBaseline />
-        <Navigation />
         <Switch>
           <Route
             path="/login"
