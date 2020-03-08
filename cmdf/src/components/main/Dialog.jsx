@@ -56,7 +56,7 @@ export default function CreateDialog({ type, open, handleClose, Transition }) {
                 <Typography>Reward</Typography>
                 <Grid container spacing={1} alignItems="flex-end" className={classes.field}>
                     <Grid item>
-                        <Icon className="fas fa-coins" />
+                        <Icon className="fas fa-gem" />
                     </Grid>
                     <Grid item>
                         <TextField id="reward" type="number" />
