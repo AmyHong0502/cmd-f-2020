@@ -191,7 +191,7 @@ export default function MainAppBar({ userSession = "No User", handleSignOut, sel
             <div style={{ width: 150, height: 150, border: '5px solid #ddd' }} />
             <div style={{ margin: '10px 20px', }}>
               <Avatar style={{ background: '#3f51b5' }}>{username.charAt(0).toUpperCase()}</Avatar>
-              <Typography>@{username.split("id.blockstack")} • Level 1 Warrior</Typography>
+              <Typography>@{username.substring(0, username.length - 14)} • Level 1 Warrior</Typography>
               <ProgressBar percentage={percentage} />
               <ProgressBar percentage={percentage} />
             </div>
