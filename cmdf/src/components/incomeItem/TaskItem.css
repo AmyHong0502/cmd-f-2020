@@ -41,7 +41,7 @@
   transition: 0.25s;
   padding: 10px;
 
-  height: 150px;
+  /* height: 150px; */
 }
 .myQuiz:hover,
 .myMission:hover {
