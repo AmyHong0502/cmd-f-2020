@@ -1,13 +1,14 @@
-import firebase from 'firebase'
-const config ={
-    apiKey: "AIzaSyDSpJ1DQuSb9LeCfqsrFNOsDJNaroBtHuc",
-    authDomain: "finance-her0.firebaseapp.com",
-    databaseURL: "https://finance-her0.firebaseio.com",
-    projectId: "finance-her0",
-    storageBucket: "finance-her0.appspot.com",
-    messagingSenderId: "978897955080",
-    appId: "1:978897955080:web:fec576d0a27b1d07e1a4bd",
-    measurementId: "G-ZZB7WTQVXX"
+import firebase from "firebase";
+
+const config = {
+  apiKey: "AIzaSyBBgZzjNfXGz20LkDN6KyL0kbx0ULDqptw",
+  authDomain: "financehero-23c43.firebaseapp.com",
+  databaseURL: "https://financehero-23c43.firebaseio.com",
+  projectId: "financehero-23c43",
+  storageBucket: "financehero-23c43.appspot.com",
+  messagingSenderId: "424261575675",
+  appId: "1:424261575675:web:9cb4ef57f94aef12ff215e",
+  measurementId: "G-G38FPQ625Y"
 };
 
 firebase.initializeApp(config);
