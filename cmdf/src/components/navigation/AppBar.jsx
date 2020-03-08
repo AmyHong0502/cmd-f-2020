@@ -3,25 +3,17 @@ import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
-import CameraIcon from "@material-ui/icons/PhotoCamera";
-import Container from "@material-ui/core/Container";
-import Grid from "@material-ui/core/Grid";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Drawer from '@material-ui/core/Drawer';
-// import CssBaseline from '@material-ui/core/CssBaseline';
-import Badge from '@material-ui/core/Badge';
 import Fab from '@material-ui/core/Fab';
-import CardMedia from '@material-ui/core/CardMedia';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import NotificationsIcon from '@material-ui/icons/Notifications';
 import FavoriteRoundedIcon from '@material-ui/icons/FavoriteRounded';
 import RedeemRoundedIcon from '@material-ui/icons/RedeemRounded';
 import ListItem from '@material-ui/core/ListItem';
@@ -97,24 +89,6 @@ const useStyles = makeStyles(theme => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginLeft: 0,
-  },
-  taskBoard: {
-    display: 'flex',
-  },
-  taskColumn: {
-    borderRadius: '24px',
-    flexGrow: 1,
-    margin: '24px',
-    height: '300px',
-    background: '#ddd',
-  },
-  task: {},
-  heroContent: {
-    backgroundColor: theme.palette.background.paper,
-    // padding: theme.spacing(8, 0, 6)
-  },
-  heroButtons: {
-    marginTop: theme.spacing(4)
   },
   icon: {
     marginRight: theme.spacing(2)
