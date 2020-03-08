@@ -80,7 +80,7 @@ export default function CreateDialog({ type, open, handleClose, Transition }) {
                     Cancel
                 </Button>
                 <Button onClick={handleClose} color="primary">
-                    Subscribe
+                    Save
                 </Button>
             </DialogActions>
         </Dialog>
