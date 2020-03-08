@@ -18,7 +18,7 @@ import RedeemRoundedIcon from '@material-ui/icons/RedeemRounded';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ProgressChart from './ProgressChart';
+import ProgressChart from '../navigation/ProgressChart';
 
 const drawerWidth = 300;
 
@@ -166,7 +166,7 @@ export default function MainAppBar() {
           <Typography variant="h6" noWrap>
             $200.00
           </Typography>
-          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
+          <Button variant="outlined" style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer

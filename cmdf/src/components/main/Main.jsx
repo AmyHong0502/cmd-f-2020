@@ -10,6 +10,7 @@ import Typography from "@material-ui/core/Typography";
 import Slide from '@material-ui/core/Slide';
 import { makeStyles } from "@material-ui/core/styles";
 import Dialog from "./Dialog";
+import AppBar from "./AppBar";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -84,6 +85,7 @@ export default function Main() {
 
   return (
     <main>
+      <AppBar />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (
@@ -113,7 +115,7 @@ export default function Main() {
         </Fab>
       </Slide>
       {cards.map((card, i) => (
-        <Dialog open={card.open} handleClose={card.handleClose} Transition={Transition} type={card.title} />
+        <Dialog key={i} open={card.open} handleClose={card.handleClose} Transition={Transition} type={card.title} />
       ))}
     </main>
   );

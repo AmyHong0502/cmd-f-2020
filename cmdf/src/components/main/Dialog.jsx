@@ -42,7 +42,6 @@ export default function CreateDialog({ type, open, handleClose, Transition }) {
                     margin="dense"
                     id="title"
                     variant="outlined"
-                    autocomplete="off"
                     fullWidth
                 />
                 <Typography>Notes</Typography>
