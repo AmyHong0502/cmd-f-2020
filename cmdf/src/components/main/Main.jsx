@@ -15,6 +15,7 @@ import ExpenseItem from "../incomeItem/ExpenseItem";
 import Footer from "../footer/Footer";
 import Dialog from "./Dialog";
 import AppBar from "./AppBar";
+import TaskItem from "../incomeItem/TasksItem";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -30,20 +31,9 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const quizzes = [
+const missions = [
   {
-    checkin: "Do you know interest rate is yearly based?",
-    mission: ["Sell unwanted clothes"],
-    quizzes: [
-      {
-        problem: "A business firm tries to maximise its profits",
-        answer: "T"
-      },
-      {
-        problem: "Unearned Revenue is Asset account",
-        answer: "T"
-      }
-    ]
+    mission: ["Quiz", "Mission"]
   }
 ];
 const incomes = [
@@ -134,8 +124,8 @@ export default function Main(props) {
       case "Tasks":
         return (
           <Paper className={classes.paper}>
-            {quizzes.map(({ mission }) => (
-              <ContainedCardHeader mission={mission} />
+            {missions.map(({ mission }) => (
+              <TaskItem mission={mission} />
             ))}
           </Paper>
         );
