@@ -61,9 +61,6 @@ class App extends React.Component {
         window.location = window.location.origin;
       });
     }
-    else{
-      this.setState({userData : userSession.loadUserData()})
-    }
   }
 
   render() {
@@ -84,7 +81,7 @@ class App extends React.Component {
           />
           <ProtectedRoute path="/" exact>
             <Main
-              userSession={this.state.userData.username}
+              userSession={userSession}
               handleSignOut={this.handleSignOut}
             />
           </ProtectedRoute>
