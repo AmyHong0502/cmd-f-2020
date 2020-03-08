@@ -4,6 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+import MainAppBar from "../navigation/AppBar";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -21,6 +22,7 @@ export default function Main() {
 
   return (
     <main>
+      <MainAppBar />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (

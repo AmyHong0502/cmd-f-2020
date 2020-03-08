@@ -4,7 +4,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Navigation from "./components/navigation/Navigation";
 import Main from "./components/main/Main";
-import MainAppBar from "./components/navigation/AppBar";
 import Footer from "./components/footer/Footer";
 
 import Register from "./pages/register";
@@ -33,7 +32,6 @@ class App extends React.Component {
       <>
         <CssBaseline />
         <Navigation />
-        <MainAppBar />
         <Switch>
           <Route
             path="/login"
