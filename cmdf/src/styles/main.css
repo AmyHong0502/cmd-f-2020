@@ -1,0 +1,23 @@
+button.swal2-confirm.swal2-styled,
+.swal2-progress-steps .swal2-progress-step,
+.swal2-progress-steps .swal2-progress-step-line,
+.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step {
+    background-color: rgb(63, 81, 181);
+}
+
+.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line,
+.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step {
+    background-color: lightsteelblue;
+}
+
+.MuiAlert-message {
+    display: block!important;
+}
+
+.MuiAlert-icon {
+    align-self: center;
+}
+
+.MuiSnackbar-anchorOriginTopRight {
+    top: 86px!important;
+}
