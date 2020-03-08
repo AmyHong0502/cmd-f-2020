@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProgressChart from '../navigation/ProgressChart';
+import ProgressBar from '../progressBar/ProgressBar';
 import firebase from '../../firebase';
 
 const drawerWidth = 300;
@@ -96,27 +97,6 @@ const icons = [
   { name: 'Assets', icon: 'emoji_events_rounded' },
   { name: 'History', icon: 'equalizer_rounded' },
 ];
-
-const ProgressBar = (props) => {
-  return (
-    <div style={{ display: 'flex', margin: '8px 0', }}>
-      <div style={{
-        position: 'relative',
-        height: 16,
-        width: 320,
-        background: 'rgba(255, 165, 0, 0.5)', /* orange */
-        borderRadius: 50,
-      }}>
-        <Bar percentage={props.percentage} />
-      </div>
-      <span style={{ fontSize: '0.8rem', marginLeft: 8 }}>{`${props.percentage}/100`}</span>
-    </div>
-  )
-}
-
-const Bar = (props) => {
-  return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
-}
 
 export default function MainAppBar({ userSession = "No User", handleSignOut, selectedTab, handleSelectedTab }) {
   const classes = useStyles();
