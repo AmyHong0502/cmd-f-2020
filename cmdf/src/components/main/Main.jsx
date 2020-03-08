@@ -15,9 +15,11 @@ import ExpenseItem from "../incomeItem/ExpenseItem";
 import Footer from "../footer/Footer";
 import Dialog from "./Dialog";
 import AppBar from "./AppBar";
+import TaskItem from "../incomeItem/TasksItem";
 import Assets from "./assets/Assets";
 import History from "./history/History";
 import Swal from 'sweetalert2';
+import firebase from '../../firebase';
 import "../../styles/main.css";
 
 const useStyles = makeStyles(theme => ({
@@ -34,25 +36,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const quizzes = [
+const missions = [
   {
-    checkin: "Do you know interest rate is yearly based?",
-    mission: ["Sell unwanted clothes"],
-    quizzes: [
-      {
-        problem: "A business firm tries to maximise its profits",
-        answer: "T"
-      },
-      {
-        problem: "Unearned Revenue is Asset account",
-        answer: "T"
-      }
-    ]
+    mission: ["Quiz", "Mission"]
   }
-];
-const incomes = [
-  { task: "collect changes", amount: 20 },
-  { task: "do housework", amount: 15 }
 ];
 const expenses = [
   { name: "buy math textbook", spend: 100 },
@@ -69,7 +56,24 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
-  const userData = userSession.loadUserData();
+  const [incomes, setIncomes] = React.useState([]);
+  const str = userSession.loadUserData().username
+  const username = str.substring(0, str.length - 14);
+  const usersRef = firebase.database().ref("user/" + username);
+
+
+  // usersRef.child(username).set({
+  //   income: [
+  //     { task: "collect changes", amount: 20 },
+  //     { task: "do housework", amount: 15 }
+  //   ],
+  //   expense: [
+  //     { name: "buy math textbook", spend: 100 },
+  //     { name: "buy a hoodie", spend: 50 }
+  //   ],
+  //   point: 200,
+  //   gold: 250
+  // });
 
   const toggleUp = () => setUp(!up);
 
@@ -142,6 +146,13 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
     }
   ];
 
+  useEffect(() => {
+    usersRef.on('value', snapshot => {
+      console.log(snapshot.val().income)
+      setIncomes(snapshot.val().income);
+    });
+  }, []);
+
   const CardList = props => {
     const { title } = props;
     switch (title) {
@@ -164,8 +175,8 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
       case "Tasks":
         return (
           <Paper className={classes.paper}>
-            {quizzes.map(({ mission }, i) => (
-              <ContainedCardHeader key={i} mission={mission} />
+            {missions.map(({ mission }) => (
+              <TaskItem mission={mission} />
             ))}
           </Paper>
         );
