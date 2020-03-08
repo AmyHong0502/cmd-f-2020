@@ -1,38 +1,23 @@
-import React from 'react';
-import Grid from '@material-ui/core/Grid';
-import './TaskItem.css';
-import { makeStyles } from '@material-ui/core/styles';
+import React from "react";
+import Button from "@material-ui/core/Button";
+import "./TaskItem.css";
 
-const useStyles = makeStyles(theme => ({
-  header: {
-    flexGrow: 1,
-    justifyContent: 'space-between'
-  }
-}));
+const quizzes = [
+    { Q: 'A business firm tries to maximise its profits', A: 'T' },
+    { Q: 'Unearned Revenue is Asset account', A: 'T' },
+    { Q: 'The interest rate is applied on yearly', A: 'T' },
+    { Q: 'Monopoly is when there is a single buyer', A: 'F' },
+    { Q: 'Saving account is for sending money', A: 'F' },
+];
 
 const TaskItem = props => {
-  const { mission } = props;
-  const classes = useStyles();
-  return (
-    <Grid container className={classes.header}>
-      <Grid
-        item
-        xs={5}
-        style={{ margin: '8px', padding: '-10px' }}
-        className='myQuiz'
-      >
-        Daily Quiz
-      </Grid>
-      <Grid
-        item
-        xs={5}
-        style={{ margin: '8px', padding: '-10px' }}
-        className='myMission'
-      >
-        Daily Mission
-      </Grid>
-    </Grid>
-  );
-};
+    const { mission, popQuiz } = props;
+    return (
+        <div className="myTask">
+            <Button className="myQuiz" onClick={() => popQuiz(quizzes)}>Daily Quiz</Button>
+            <Button className="myMission" onClick={() => popQuiz(quizzes)}>Daily Mission</Button>
+        </div>
+    );
+}
 
 export default TaskItem;

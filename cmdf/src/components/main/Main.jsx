@@ -22,6 +22,7 @@ import Assets from "./assets/Assets";
 import History from "./history/History";
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import { popQuiz } from './popup/Popup';
 import "../../styles/main.css";
 
 const useStyles = makeStyles(theme => ({
@@ -50,7 +51,6 @@ function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
-
 export default function Main({ userSession = "No User", handleSignOut = () => { } }) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
@@ -60,6 +60,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const [tasksOpen, setTasksOpen] = React.useState(false);
   const [incomes, setIncomes] = React.useState([{ task: "Add your income!", amount: "0" }]);
   const [expenses, setExpenses] = React.useState([]);
+  const [coins, setCoins] = React.useState([]);
   const [gems, setGems] = React.useState([]);
   const [alert, setAlert] = React.useState(true);
   const str = userSession.loadUserData().username;
@@ -83,7 +84,39 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const handleSelectedTab = index => setSelectedTab(index);
 
   useEffect(() => {
-   
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      progressSteps: ['1', '2', '3']
+    }).queue([
+      {
+        title: 'Welcome!',
+        html:
+          'It looks like you logged in for the first time!' +
+          '<br>Let\'s get started😉' +
+          '<br><h3>What\'s your name?</h3>',
+      },
+      {
+        title: 'Awesome!',
+        text: 'What\'s your goal?',
+      },
+      {
+        title: 'You\'r almost there!',
+        text: 'How many days do you have?',
+      },
+    ]).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          title: `You\'r all set, ${result.value[0]}!`,
+          html: `
+              We noted down your new goal: ${result.value[1]}
+              <br>You have ${result.value[2]} days!
+              <br><h3>We\'ll make sure you get there💪</h3>
+            `,
+          confirmButtonText: 'Lovely!'
+        }).then(() => setAlert(false));
+      }
+    });
   }, []);
 
   const cards = [
@@ -178,7 +211,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
         return (
           <Paper className={classes.paper}>
             {missions.map(({ mission }, i) => (
-              <TaskItem key={i} mission={mission} />
+              <TaskItem key={i} mission={mission} popQuiz={popQuiz} />
             ))}
           </Paper>
         );

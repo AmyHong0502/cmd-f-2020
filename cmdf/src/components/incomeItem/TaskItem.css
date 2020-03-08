@@ -1,10 +1,36 @@
-.myQuiz,
-.myMission {
-  display: flex;
-  justify-content: center;
 
-  font-size: large;
-  font-weight: 700;
+.myTask {
+    display: flex;
+    flex-direction: row;
+    position: static;
+    height: 140px;
+    width: 150vwx;
+    padding: 10px;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myQuiz {
+    display: flex;
+    flex-grow: 1;
+    justify-content: center;
+    font-size: large;
+    font-weight: 700;
+    align-items: center;
+    color: white;
+    width: 150vwx;
+    background-color: rgb(124, 63, 181);
+    border-radius: 5px;
+    transition: 0.25s;
+    padding: 10px;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myQuiz:hover{
+    background-color:orange;
+    box-shadow: 2px 2px black;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myMission {
+    display: flex;
+    flex-grow: 1;
+    margin-left: 10px;
+    align-items: center;
+    color: white;
 
   align-items: center;
   color: white;
@@ -21,4 +47,8 @@
 .myMission:hover {
   background-color: orange;
   box-shadow: 2px 2px black;
+}
+.MuiButtonBase-root.MuiButton-root.MuiButton-text.myMission:hover{
+    background-color:orange;
+    box-shadow: 2px 2px black;
 }
