@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProgressChart from '../navigation/ProgressChart';
+import ProgressBar from '../progressBar/ProgressBar';
 import firebase from '../../firebase';
 
 const drawerWidth = 300;
@@ -97,38 +98,15 @@ const icons = [
   { name: 'History', icon: 'equalizer_rounded' },
 ];
 
-const ProgressBar = (props) => {
-  return (
-    <div style={{ display: 'flex', margin: '10px 0', }}>
-      <div style={{
-        position: 'relative',
-        height: 20,
-        width: 350,
-        borderRadius: 50,
-        border: '1px solid #333',
-      }}>
-        <Bar percentage={props.percentage} />
-      </div>
-      <Typography style={{ fontSize: '0.9rem', marginLeft: 10 }}>{`${props.percentage}/100`}</Typography>
-    </div>
-  )
-}
-
-const Bar = (props) => {
-  return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
-}
-
 export default function MainAppBar({ userSession = "No User", handleSignOut, selectedTab, handleSelectedTab }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
-  console.log(userSession);
   const username =
     userSession.loadUserData().username == undefined
       ? "No User"
       : userSession.loadUserData().username;
-  console.log("------------->"+username);
   const quizref = firebase.database().ref("quiz");
   quizref.on("value", snapshot => {
     console.log(snapshot.val());
