@@ -5,8 +5,8 @@ const TaskItem = props => {
     const { mission } = props;
     return (
         <div className="myTask"> 
-         <div className="myQuiz"> Quiz</div>
-         <div className="myMission"> Mission</div>
+         <div className="myQuiz">:   Daily Quiz   :</div>
+         <div className="myMission"> Daily Mission</div>
         </div>
     );
 
