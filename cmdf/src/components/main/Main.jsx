@@ -118,24 +118,24 @@ export default function Main(props) {
       case "Income":
         return (
           <Paper className={classes.paper}>
-            {incomes.map(({ task, amount }) => (
-              <IncomeItem task={task} amount={amount} />
+            {incomes.map(({ task, amount }, i) => (
+              <IncomeItem key={i} task={task} amount={amount} />
             ))}
           </Paper>
         );
       case "Expense":
         return (
           <Paper className={classes.paper}>
-            {expenses.map(({ name, spend }) => (
-              <ExpenseItem name={name} spend={spend} />
+            {expenses.map(({ name, spend }, i) => (
+              <ExpenseItem key={i} name={name} spend={spend} />
             ))}
           </Paper>
         );
       case "Tasks":
         return (
           <Paper className={classes.paper}>
-            {quizzes.map(({ mission }) => (
-              <ContainedCardHeader mission={mission} />
+            {quizzes.map(({ mission }, i) => (
+              <ContainedCardHeader key={i} mission={mission} />
             ))}
           </Paper>
         );
