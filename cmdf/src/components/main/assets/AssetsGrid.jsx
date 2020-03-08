@@ -17,7 +17,7 @@ export default function Assets() {
     return (
         <div className={classes.root}>
             {Array(12).fill(0).map((item, i) =>
-                <Paper style={{ padding: 50, margin: 50 }} elevation={4}>
+                <Paper key={i} style={{ padding: 50, margin: 50 }} elevation={4}>
                     <Icon className="fas fa-coins"></Icon>
                 </Paper>
             )}

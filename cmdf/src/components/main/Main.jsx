@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     bottom: 30
   },
   paper: {
-    height: 140
+    padding: 10,
   }
 }));
 
@@ -63,6 +63,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Main(props) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(0);
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
@@ -162,16 +163,6 @@ export default function Main(props) {
         <AppBar userSession={props.userSession} signOut={props.handleSignOut} selectedTab={selectedTab} handleSelectedTab={handleSelectedTab} />
         <Paper className={classes.cardGrid}>
           <Content selectedTab={selectedTab} />
-        </Paper>
-        <Paper className={classes.cardGrid}>
-          <Grid container justify="center" spacing={8}>
-            {cards.map((card, i) => (
-              <Grid item key={i} xs={12} sm={6} md={4}>
-                <Typography variant="h6">{card.title}</Typography>
-                <CardList {...card} />
-              </Grid>
-            ))}
-          </Grid>
         </Paper>
         <Fab
           className={classes.fab}
