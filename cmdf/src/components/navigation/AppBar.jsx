@@ -1,6 +1,9 @@
 import React from "react";
 import clsx from 'clsx';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
+import {
+  Avatar
+} from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -97,15 +100,18 @@ const useStyles = makeStyles(theme => ({
 
 const ProgressBar = (props) => {
   return (
-    <div style={{
-      position: 'relative',
-      height: '20px',
-      width: '350px',
-      borderRadius: '50px',
-      border: '1px solid #333',
-      margin: '10px',
-    }}>
-      <Bar percentage={props.percentage} />
+    <div style={{ display: 'flex', margin: '10px 0', }}>
+      <div style={{
+        position: 'relative',
+        height: '20px',
+        width: '350px',
+        borderRadius: '50px',
+        border: '1px solid #333',
+        // margin: '10px 0',
+      }}>
+        <Bar percentage={props.percentage} />
+      </div>
+      <Typography style={{ fontSize: '0.9rem', marginLeft: '10px' }}>{`${props.percentage}/100`}</Typography>
     </div>
   )
 }
@@ -194,10 +200,11 @@ export default function MainAppBar() {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.drawerHeader} />
         <div className={classes.profile} style={{ display: 'flex' }}>
           <div style={{ width: '150px', height: '150px', border: '5px solid #ddd' }} />
-          <div>
+          <div style={{ margin: '10px 20px', }}>
+            <Avatar style={{ background: '#3f51b5' }}>AK</Avatar>
+            <Typography>@alice828 • Level 1 Warrior</Typography>
             <ProgressBar percentage={percentage} />
             <ProgressBar percentage={percentage} />
           </div>
