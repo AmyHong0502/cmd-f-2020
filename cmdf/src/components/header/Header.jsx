@@ -70,7 +70,7 @@ export default function Header(props) {
       })}
     >
       <Grid container className={classes.header} spacing={2}>
-        <Grid item xs={12} s={6} md={6}>
+        <Grid item xs={12} sm={6}>
           <div className={classes.profile}>
             <div
               style={{ width: 150, height: 150, border: '5px solid #ddd', display: 'flex' }}>
@@ -91,7 +91,7 @@ export default function Header(props) {
             </div>
           </div>
         </Grid>
-        <Grid item xs={12} s={6} md={6}>
+        <Grid item xs={12} sm={6}>
           <ProgressChart />
         </Grid>
       </Grid>
