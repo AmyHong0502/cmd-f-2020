@@ -51,7 +51,7 @@ export default function ProgressChart({ activeSeriesIndex }) {
   );
 
   return (
-    <div style={{ width: '500px', height: '300px' }}>
+    <div style={{ width: '100%', height: '300px' }}>
       <Chart data={data} axes={axes} getSeriesStyle={getSeriesStyle} tooltip />
     </div>
   );
