@@ -3,7 +3,7 @@ import { Switch, Route } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Main from "./components/main/Main";
-import Footer from "./components/footer/Footer";
+
 
 import Register from "./pages/register";
 import Login from "./pages/login";
@@ -60,7 +60,6 @@ class App extends React.Component {
             )}
           />
         </Switch>
-        <Footer />
       </>
     );
   }

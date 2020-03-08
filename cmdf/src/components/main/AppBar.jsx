@@ -187,7 +187,6 @@ export default function MainAppBar(props) {
             $200.00
           </Typography>
 
-          <Link to="/login">Sign In</Link>
           <Link to="/register">Sign Up</Link>
 
           <Button
