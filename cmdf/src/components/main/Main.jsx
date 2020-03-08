@@ -110,8 +110,8 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
         firebase.database().ref("user").child(username).set({
           income: [{ task: "Welcome!", amount: "0" }],
           expense: [{ name: "Welcome!", spend: "0" }],
-          point: 200,
-          gold: 250,
+          gem: 200,
+          money: 250,
           avatar: '3'
         });
         Swal.mixin({
@@ -132,7 +132,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
           },
           {
             title: 'You\'r almost there!',
-            text: 'How many days do you have?',
+            text: 'How much money do you need to have to achieve the goal?',
           },
         ]).then((result) => {
           if (result.value) {
@@ -140,7 +140,7 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
               title: `You\'r all set, ${result.value[0]}!`,
               html: `
                   We noted down your new goal: ${result.value[1]}
-                  <br>You have ${result.value[2]} days!
+                  <br>You need to collect ${result.value[2]} dollars!
                   <br><h3>We\'ll make sure you get there💪</h3>
                 `,
               confirmButtonText: 'Lovely!'
