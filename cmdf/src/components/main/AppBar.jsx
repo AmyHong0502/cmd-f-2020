@@ -123,12 +123,10 @@ export default function MainAppBar({ userSession = "No User", handleSignOut, sel
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
-  console.log(userSession);
   const username =
     userSession.loadUserData().username == undefined
       ? "No User"
       : userSession.loadUserData().username;
-  console.log("------------->"+username);
   const quizref = firebase.database().ref("quiz");
   quizref.on("value", snapshot => {
     console.log(snapshot.val());
