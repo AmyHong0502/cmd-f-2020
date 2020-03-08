@@ -22,6 +22,7 @@ import RedeemRoundedIcon from '@material-ui/icons/RedeemRounded';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
+import ProgressChart from './ProgressChart';
 
 const drawerWidth = 300;
 
@@ -95,6 +96,10 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     marginRight: theme.spacing(2)
+  },
+  profile: {
+    display: 'flex',
+    alignItems: 'center',
   },
 }));
 
@@ -200,14 +205,17 @@ export default function MainAppBar() {
           [classes.contentShift]: open,
         })}
       >
-        <div className={classes.profile} style={{ display: 'flex' }}>
-          <div style={{ width: '150px', height: '150px', border: '5px solid #ddd' }} />
-          <div style={{ margin: '10px 20px', }}>
-            <Avatar style={{ background: '#3f51b5' }}>AK</Avatar>
-            <Typography>@alice828 • Level 1 Warrior</Typography>
-            <ProgressBar percentage={percentage} />
-            <ProgressBar percentage={percentage} />
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div className={classes.profile}>
+            <div style={{ width: '150px', height: '150px', border: '5px solid #ddd' }} />
+            <div style={{ margin: '10px 20px', }}>
+              <Avatar style={{ background: '#3f51b5' }}>AK</Avatar>
+              <Typography>@alice828 • Level 1 Warrior</Typography>
+              <ProgressBar percentage={percentage} />
+              <ProgressBar percentage={percentage} />
+            </div>
           </div>
+          <ProgressChart />
         </div>
         <Fab className={classes.fab} color="primary" aria-label="add">
           <AddIcon />
