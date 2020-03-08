@@ -17,12 +17,12 @@ const useStyles = makeStyles(theme => ({
 
 const cards = ['Income', 'Expense', 'Tasks'];
 
-export default function Main() {
+export default function Main(props) {
   const classes = useStyles();
 
   return (
     <main>
-      <MainAppBar />
+      <MainAppBar signOut={props.handleSignOut} />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (

@@ -126,7 +126,7 @@ const Bar = (props) => {
   return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
 }
 
-export default function MainAppBar() {
+export default function MainAppBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -173,7 +173,7 @@ export default function MainAppBar() {
           <Typography variant="h6" noWrap>
             200.00
           </Typography>
-          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
+          <Button onClick={props.signOut.bind(this)} style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer

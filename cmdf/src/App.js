@@ -41,7 +41,9 @@ class App extends React.Component {
             )}
           />
           <Route path="/register" exact component={Register} />
-          <Route path="/" exact component={Main} />
+          <Route path="/" exact render={props => (
+              <Main {...props} userSession={userSession} handleSignOut={ this.handleSignOut } />
+            )} />
         </Switch>
         <Footer />
       </>
