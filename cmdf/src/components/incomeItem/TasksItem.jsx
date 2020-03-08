@@ -18,7 +18,7 @@ const TaskItem = props => {
       <Grid
         item
         xs={5}
-        style={{ margin: '8px', padding: '-10px;' }}
+        style={{ margin: '8px', padding: '-10px' }}
         className='myQuiz'
       >
         Daily Quiz
