@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
@@ -17,6 +17,8 @@ import Dialog from "./Dialog";
 import AppBar from "./AppBar";
 import Assets from "./assets/Assets";
 import History from "./history/History";
+import firebase from '../../firebase';
+
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -48,10 +50,6 @@ const quizzes = [
     ]
   }
 ];
-const incomes = [
-  { task: "collect changes", amount: 20 },
-  { task: "do housework", amount: 15 }
-];
 const expenses = [
   { name: "buy math textbook", spend: 100 },
   { name: "buy a hoodie", spend: 50 }
@@ -67,7 +65,24 @@ export default function Main({userSession = "No User", handleSignOut = () => {}}
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
-  const userData = userSession.loadUserData();
+  const [incomes, setIncomes] = React.useState([]);
+  const str = userSession.loadUserData().username
+  const username = str.substring(0, str.length - 14);
+  const usersRef = firebase.database().ref("user/"+username);
+
+  
+  // usersRef.child(username).set({
+  //   income: [
+  //     { task: "collect changes", amount: 20 },
+  //     { task: "do housework", amount: 15 }
+  //   ],
+  //   expense: [
+  //     { name: "buy math textbook", spend: 100 },
+  //     { name: "buy a hoodie", spend: 50 }
+  //   ],
+  //   point: 200,
+  //   gold: 250
+  // });
 
   const toggleUp = () => setUp(!up);
 
@@ -102,6 +117,13 @@ export default function Main({userSession = "No User", handleSignOut = () => {}}
       handleClose: handleTasksClose
     }
   ];
+
+  useEffect(() => {
+    usersRef.on('value', snapshot => {
+      console.log(snapshot.val().income)
+      setIncomes(snapshot.val().income);
+    });
+  }, []);
 
   const CardList = props => {
     const { title } = props;
