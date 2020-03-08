@@ -1,5 +1,6 @@
 import React from "react";
 import clsx from 'clsx';
+import { Link } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Avatar from "@material-ui/core/Avatar";
 import AppBar from "@material-ui/core/AppBar";
@@ -174,6 +175,10 @@ export default function MainAppBar() {
             200.00
           </Typography>
           <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
+
+          <Link to="/login">Sign In</Link>
+          <Link to="/register">Sign Up</Link>
+
         </Toolbar>
       </AppBar>
       <Drawer
