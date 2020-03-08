@@ -17,6 +17,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import ProgressChart from '../navigation/ProgressChart';
+import firebase from '../../firebase';
 
 const drawerWidth = 300;
 
@@ -117,11 +118,21 @@ const Bar = (props) => {
   return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
 }
 
-export default function MainAppBar({ selectedTab, handleSelectedTab }) {
+export default function MainAppBar({ userSession = "No User", handleSignOut, selectedTab, handleSelectedTab }) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
+  console.log(userSession);
+  const username =
+    userSession.loadUserData().username == undefined
+      ? "No User"
+      : userSession.loadUserData().username;
+  console.log("------------->"+username);
+  const quizref = firebase.database().ref("quiz");
+  quizref.on("value", snapshot => {
+    console.log(snapshot.val());
+  });
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -164,7 +175,7 @@ export default function MainAppBar({ selectedTab, handleSelectedTab }) {
           <Typography variant="h6" noWrap>
             $200.00
           </Typography>
-          <Button variant="outlined" style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}>Sign Out</Button>
+          <Button variant="outlined" onClick={handleSignOut} style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -201,8 +212,8 @@ export default function MainAppBar({ selectedTab, handleSelectedTab }) {
           <div className={classes.profile}>
             <div style={{ width: 150, height: 150, border: '5px solid #ddd' }} />
             <div style={{ margin: '10px 20px', }}>
-              <Avatar style={{ background: '#3f51b5' }}>AK</Avatar>
-              <Typography>@alice828 • Level 1 Warrior</Typography>
+              <Avatar style={{ background: '#3f51b5' }}>{username.charAt(0).toUpperCase()}</Avatar>
+              <Typography>@{username.split("id.blockstack")} • Level 1 Warrior</Typography>
               <ProgressBar percentage={percentage} />
               <ProgressBar percentage={percentage} />
             </div>

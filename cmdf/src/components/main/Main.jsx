@@ -60,14 +60,14 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Main(props) {
+export default function Main({userSession = "No User", handleSignOut = () => {}}) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
   const [selectedTab, setSelectedTab] = React.useState(0);
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
-  const userData = props.userSession.loadUserData();
+  const userData = userSession.loadUserData();
 
   const toggleUp = () => setUp(!up);
 
@@ -160,7 +160,7 @@ export default function Main(props) {
   return (
     <>
       <main>
-        <AppBar userSession={props.userSession} signOut={props.handleSignOut} selectedTab={selectedTab} handleSelectedTab={handleSelectedTab} />
+        <AppBar userSession={userSession} handleSignOut={handleSignOut} selectedTab={selectedTab} handleSelectedTab={handleSelectedTab} />
         <Paper className={classes.cardGrid}>
           <Content selectedTab={selectedTab} />
         </Paper>
