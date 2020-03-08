@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddRoundedIcon from "@material-ui/icons/AddRounded";
 import AssignmentTurnedInRoundedIcon from "@material-ui/icons/AssignmentTurnedInRounded";
 import AttachMoneyRoundedIcon from "@material-ui/icons/AttachMoneyRounded";
@@ -17,6 +17,8 @@ import Dialog from "./Dialog";
 import AppBar from "./AppBar";
 import Assets from "./assets/Assets";
 import History from "./history/History";
+import Swal from 'sweetalert2';
+import "../../styles/main.css";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
@@ -60,7 +62,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function Main({userSession = "No User", handleSignOut = () => {}}) {
+export default function Main({ userSession = "No User", handleSignOut = () => { } }) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
   const [selectedTab, setSelectedTab] = React.useState(0);
@@ -84,6 +86,43 @@ export default function Main({userSession = "No User", handleSignOut = () => {}}
   const handleTasksClose = () => setTasksOpen(false);
 
   const handleSelectedTab = index => setSelectedTab(index);
+
+  useEffect(() => {
+    Swal.mixin({
+      input: 'text',
+      confirmButtonText: 'Next &rarr;',
+      showCancelButton: true,
+      progressSteps: ['1', '2', '3']
+    }).queue([
+      {
+        title: 'Welcome!',
+        html:
+          'It looks like you logged in for the first time!' +
+          '<br>Let\'s get started😉' +
+          '<br><h3>What\'s your name?</h3>',
+      },
+      {
+        title: 'Awesome!',
+        text: 'What\'s your goal?',
+      },
+      {
+        title: 'You\'r almost there!',
+        text: 'How many days do you have?',
+      },
+    ]).then((result) => {
+      if (result.value) {
+        Swal.fire({
+          title: `You\'r all set, ${result.value[0]}!`,
+          html: `
+              We noted down your new goal: ${result.value[1]}
+              <br>You have ${result.value[2]} days!
+              <br><h3>We\'ll make sure you get there💪</h3>
+            `,
+          confirmButtonText: 'Lovely!'
+        })
+      }
+    });
+  }, []);
 
   const cards = [
     {
