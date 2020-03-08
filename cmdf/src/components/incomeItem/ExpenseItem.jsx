@@ -24,7 +24,7 @@ const ExpenseItem = props => {
           ${spend}
           <div>
             <IconButton htmlFor="text-button-file">
-                     <CreateIcon/>   </IconButton>
+            <CreateIcon/>   </IconButton>
           </div>
         </div>
       </div>
