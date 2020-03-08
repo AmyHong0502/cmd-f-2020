@@ -24,4 +24,5 @@ const TaskItem = props => {
     </Grid>
   );
 };
+
 export default TaskItem;
