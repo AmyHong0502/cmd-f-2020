@@ -1,12 +1,12 @@
-import React from "react";
-import { Chart } from "react-charts";
+import React from 'react';
+import { Chart } from 'react-charts';
 
 export default function ProgressChart({ activeSeriesIndex }) {
-  const colors = ["#3f51b5", "orange"];
+  const colors = ['#3f51b5', 'orange'];
   const data = React.useMemo(
     () => [
       {
-        label: "Points",
+        label: 'Points',
         data: [
           [0, 10],
           [1, 20],
@@ -16,7 +16,7 @@ export default function ProgressChart({ activeSeriesIndex }) {
         ]
       },
       {
-        label: "Coins",
+        label: 'Coins',
         data: [
           [0, 30],
           [1, 10],
@@ -44,14 +44,14 @@ export default function ProgressChart({ activeSeriesIndex }) {
 
   const axes = React.useMemo(
     () => [
-      { primary: true, type: "linear", position: "bottom" },
-      { type: "linear", position: "left" }
+      { primary: true, type: 'linear', position: 'bottom' },
+      { type: 'linear', position: 'left' }
     ],
     []
   );
 
   return (
-    <div style={{ width: "500px", height: "300px" }}>
+    <div style={{ width: '500px', height: '300px' }}>
       <Chart data={data} axes={axes} getSeriesStyle={getSeriesStyle} tooltip />
     </div>
   );
