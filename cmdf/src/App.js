@@ -26,6 +26,19 @@ class App extends React.Component {
     userSession.signUserOut(window.location.origin);
   }
 
+  componentWillMount() {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then(userData => {
+        if (!userData.username) {
+          throw new Error("This app requires a username.");
+        } else {
+          console.warn(userData.username);
+        }
+        window.location = window.location.origin;
+      });
+    }
+  }
+
   render() {
     return (
       <>
