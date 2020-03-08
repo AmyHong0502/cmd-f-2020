@@ -15,18 +15,20 @@ import ExpenseItem from "../incomeItem/ExpenseItem";
 import Footer from "../footer/Footer";
 import Dialog from "./Dialog";
 import AppBar from "./AppBar";
+import Assets from "./assets/Assets";
+import History from "./history/History";
 
 const useStyles = makeStyles(theme => ({
   cardGrid: {
     padding: theme.spacing(8)
   },
   fab: {
-    position: "fixed",
+    position: 'fixed',
     right: 30,
     bottom: 30
   },
   paper: {
-    height: 140
+    padding: 10,
   }
 }));
 
@@ -61,38 +63,27 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 export default function Main(props) {
   const classes = useStyles();
   const [up, setUp] = React.useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(0);
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
   const userData = props.userSession.loadUserData();
 
-  const toggleUp = () => {
-    setUp(!up);
-  };
+  const toggleUp = () => setUp(!up);
 
-  const handleIncomeOpen = () => {
-    setIncomeOpen(true);
-  };
+  const handleIncomeOpen = () => setIncomeOpen(true);
 
-  const handleExpenseOpen = () => {
-    setExpenseOpen(true);
-  };
+  const handleExpenseOpen = () => setExpenseOpen(true);
 
-  const handleTasksOpen = () => {
-    setTasksOpen(true);
-  };
+  const handleTasksOpen = () => setTasksOpen(true);
 
-  const handleIncomeClose = () => {
-    setIncomeOpen(false);
-  };
+  const handleIncomeClose = () => setIncomeOpen(false);
 
-  const handleExpenseClose = () => {
-    setExpenseOpen(false);
-  };
+  const handleExpenseClose = () => setExpenseOpen(false);
 
-  const handleTasksClose = () => {
-    setTasksOpen(false);
-  };
+  const handleTasksClose = () => setTasksOpen(false);
+
+  const handleSelectedTab = index => setSelectedTab(index);
 
   const cards = [
     {
@@ -118,24 +109,24 @@ export default function Main(props) {
       case "Income":
         return (
           <Paper className={classes.paper}>
-            {incomes.map(({ task, amount }) => (
-              <IncomeItem task={task} amount={amount} />
+            {incomes.map(({ task, amount }, i) => (
+              <IncomeItem key={i} task={task} amount={amount} />
             ))}
           </Paper>
         );
       case "Expense":
         return (
           <Paper className={classes.paper}>
-            {expenses.map(({ name, spend }) => (
-              <ExpenseItem name={name} spend={spend} />
+            {expenses.map(({ name, spend }, i) => (
+              <ExpenseItem key={i} name={name} spend={spend} />
             ))}
           </Paper>
         );
       case "Tasks":
         return (
           <Paper className={classes.paper}>
-            {quizzes.map(({ mission }) => (
-              <ContainedCardHeader mission={mission} />
+            {quizzes.map(({ mission }, i) => (
+              <ContainedCardHeader key={i} mission={mission} />
             ))}
           </Paper>
         );
@@ -144,19 +135,34 @@ export default function Main(props) {
     }
   };
 
+  const Content = (props) => {
+    const { selectedTab } = props;
+
+    switch (selectedTab) {
+      case 0:
+        return <Grid container justify="center" spacing={8}>
+          {cards.map((card, i) => (
+            <Grid item key={i} xs={12} sm={6} md={4}>
+              <Typography variant="h6">{card.title}</Typography>
+              <CardList {...card} />
+            </Grid>
+          ))}
+        </Grid>;
+      case 1:
+        return <Assets />;
+      case 2:
+        return <History />;
+      default:
+        return <div></div>;
+    }
+  };
+
   return (
     <>
       <main>
-        <AppBar userSession={props.userSession} signOut={props.handleSignOut} />
+        <AppBar userSession={props.userSession} signOut={props.handleSignOut} selectedTab={selectedTab} handleSelectedTab={handleSelectedTab} />
         <Paper className={classes.cardGrid}>
-          <Grid container justify="center" spacing={8}>
-            {cards.map((card, i) => (
-              <Grid item key={i} xs={12} sm={6} md={4}>
-                <Typography variant="h6">{card.title}</Typography>
-                <CardList {...card} />
-              </Grid>
-            ))}
-          </Grid>
+          <Content selectedTab={selectedTab} />
         </Paper>
         <Fab
           className={classes.fab}
