@@ -20,6 +20,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import ProgressChart from "../navigation/ProgressChart";
+import firebase from '../../firebase.js';
 
 const drawerWidth = 300;
 
@@ -134,11 +135,20 @@ const Bar = props => {
   );
 };
 
+
+
 export default function MainAppBar(props) {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
+  const username = props.username;
+  const quizref = firebase.database().ref('quiz');
+  console.log(username);
+  quizref.on('value', (snapshot) => {
+    console.log(snapshot.val());
+  });
+  
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -244,8 +254,8 @@ export default function MainAppBar(props) {
               style={{ width: 150, height: 150, border: "5px solid #ddd" }}
             />
             <div style={{ margin: "10px 20px" }}>
-              <Avatar style={{ background: "#3f51b5" }}>AK</Avatar>
-              <Typography>@alice828 • Level 1 Warrior</Typography>
+              <Avatar style={{ background: "#3f51b5" }}>{username.charAt(0).toUpperCase()}</Avatar>
+              <Typography>{username.split(".id.blockstack")} • Level 1 Warrior</Typography>
               <ProgressBar percentage={percentage} />
               <ProgressBar percentage={percentage} />
             </div>

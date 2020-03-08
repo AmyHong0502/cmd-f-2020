@@ -85,7 +85,7 @@ export default function Main(props) {
 
   return (
     <main>
-      <AppBar signOut={props.handleSignOut} />
+      <AppBar username={props.username} signOut={props.handleSignOut} />
       <Paper className={classes.cardGrid}>
         <Grid container justify="center" spacing={8}>
           {cards.map((card, i) => (

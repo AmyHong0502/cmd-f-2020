@@ -16,6 +16,12 @@ import "./App.css";
 const userSession = new UserSession({ appConfig });
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      userData: undefined
+    } 
+  }
   handleSignIn(e) {
     e.preventDefault();
     userSession.redirectToSignIn();
@@ -32,10 +38,14 @@ class App extends React.Component {
         if (!userData.username) {
           throw new Error("This app requires a username.");
         } else {
+          this.setState({userData})
           console.warn(userData.username);
         }
         window.location = window.location.origin;
       });
+    }
+    else{
+      this.setState({userData : userSession.loadUserData()})
     }
   }
 
@@ -56,7 +66,7 @@ class App extends React.Component {
             path="/"
             exact
             render={props => (
-              <Main {...props} handleSignOut={this.handleSignOut} />
+              <Main {...props} username={this.state.userData.username} handleSignOut={this.handleSignOut} />
             )}
           />
         </Switch>
