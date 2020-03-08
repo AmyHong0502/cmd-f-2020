@@ -95,7 +95,6 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
     Swal.mixin({
       input: 'text',
       confirmButtonText: 'Next &rarr;',
-      showCancelButton: true,
       progressSteps: ['1', '2', '3']
     }).queue([
       {
@@ -175,8 +174,8 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
       case "Tasks":
         return (
           <Paper className={classes.paper}>
-            {missions.map(({ mission }) => (
-              <TaskItem mission={mission} />
+            {missions.map(({ mission }, i) => (
+              <TaskItem key={i} mission={mission} />
             ))}
           </Paper>
         );
