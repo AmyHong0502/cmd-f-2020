@@ -111,16 +111,28 @@ export default function Main(props) {
   ];
 
   const CardList = (props) => {
-    const {title, p, q, r, list} = props;
+    const { title } = props;
     switch(title) {
       case 'Income':
-        return <div></div>;
+        return <Paper className={classes.paper}>
+          {incomes.map(({ task, amount }) => (
+            <IncomeItem task={task} amount={amount} />
+          ))}
+        </Paper>;
       case 'Expense':
-        return <div></div>;
+        return <Paper className={classes.paper}>
+          {expenses.map(({ name, spend }) => (
+            <ExpenseItem name={name} spend={spend}/>
+          ))}
+        </Paper>;
       case 'Tasks':
-        return <div></div>;
+        return <Paper className={classes.paper}>
+          {quizzes.map(({ mission }) => (
+            <ContainedCardHeader mission={mission} />
+          ))}
+        </Paper>;
       default:
-        <div></div>;
+        return <div></div>;
     }
   }
 
