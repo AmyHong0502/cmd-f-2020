@@ -37,6 +37,9 @@ const icons = [
 ];
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    display: 'flex',
+  },
   appBar: {
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -115,13 +118,33 @@ const useStyles = makeStyles(theme => ({
   },
   icon: {
     marginRight: theme.spacing(2)
-  }
+  },
 }));
+
+const ProgressBar = (props) => {
+  return (
+    <div style={{
+      position: 'relative',
+      height: '20px',
+      width: '350px',
+      borderRadius: '50px',
+      border: '1px solid #333',
+      margin: '10px',
+    }}>
+      <Bar percentage={props.percentage} />
+    </div>
+  )
+}
+
+const Bar = (props) => {
+  return <div style={{ width: `${props.percentage}%`, height: '100%', transition: 'width .2s ease-in', background: 'orange', borderRadius: 'inherit' }} />
+}
 
 export default function MainAppBar() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const [percentage, setPercentage] = React.useState(60);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -132,7 +155,7 @@ export default function MainAppBar() {
   };
 
   return (
-    <>
+    <div className={classes.root}>
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
@@ -164,6 +187,7 @@ export default function MainAppBar() {
           <Typography variant="h6" noWrap>
             200.00
           </Typography>
+          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: '10px' }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -192,20 +216,22 @@ export default function MainAppBar() {
         </List>
       </Drawer>
       <div
-        className={clsx(classes.heroContent, {
+        className={clsx(classes.content, {
           [classes.contentShift]: open,
         })}
       >
-        <div style={{
-          display: 'flex',
-          alignItems: 'center',
-          padding: theme.spacing(0, 1),
-          ...theme.mixins.toolbar,
-          justifyContent: 'flex-end',
-        }}>
-          <div style={{ width: '150px', height: '150px', border: '1px solid' }}></div>
+        <div className={classes.drawerHeader} />
+        <div className={classes.profile} style={{ display: 'flex' }}>
+          <div style={{ width: '150px', height: '150px', border: '5px solid #ddd' }} />
+          <div>
+            <ProgressBar percentage={percentage} />
+            <ProgressBar percentage={percentage} />
+          </div>
         </div>
+        <Fab className={classes.fab} color="primary" aria-label="add">
+          <AddIcon />
+        </Fab>
       </div>
-    </>
+    </div>
   );
 }
