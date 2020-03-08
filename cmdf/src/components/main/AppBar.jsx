@@ -142,7 +142,7 @@ export default function MainAppBar(props) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   const [percentage, setPercentage] = React.useState(60);
-  const username = props.username;
+  const username = props.username==undefined ? 'No User' : props.username;
   const quizref = firebase.database().ref('quiz');
   console.log(username);
   quizref.on('value', (snapshot) => {
@@ -196,9 +196,6 @@ export default function MainAppBar(props) {
           <Typography variant="h6" noWrap>
             $200.00
           </Typography>
-
-          <Link to="/login">Sign In</Link>
-          <Link to="/register">Sign Up</Link>
 
           <Button
             variant="outlined"

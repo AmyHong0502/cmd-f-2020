@@ -1,10 +1,8 @@
 import React from "react";
+import { Redirect } from "react-router-dom";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -15,6 +13,9 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles(theme => ({
   root: {
     height: "100vh"
+  },
+  logo: {
+    width: "45%"
   },
   image: {
     backgroundImage: "url(./game_background_4.png)",
@@ -32,10 +33,6 @@ const useStyles = makeStyles(theme => ({
     flexDirection: "column",
     alignItems: "center"
   },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1)
@@ -47,7 +44,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const { handleSignIn } = props;
+  const { userSession, handleSignIn } = props;
+
+  if (userSession.isUserSignedIn()) {
+    return <Redirect to={{ pathname: "/" }} />;
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -55,12 +56,7 @@ export default function Login(props) {
       <Grid item xs={false} sm={4} md={7} className={classes.image} />
       <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
         <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Finance Hero
-          </Typography>
+          <img src="./logo_transparent.png" className={classes.logo} />
           <Button
             type="submit"
             fullWidth
@@ -69,15 +65,8 @@ export default function Login(props) {
             className={classes.submit}
             onClick={handleSignIn.bind(this)}
           >
-            Sign In
+            Sign In with Blockstack
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
           <Box mt={5}>
             <Typography variant="body2" color="textSecondary" align="center">
               Happy Gaming!
