@@ -1,11 +1,8 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Redirect } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Main from "./components/main/Main";
-import Footer from "./components/footer/Footer";
-
-import Register from "./pages/register";
 import Login from "./pages/login";
 
 import { UserSession } from "blockstack";
@@ -14,6 +11,26 @@ import { appConfig } from "./assets/constants";
 import "./App.css";
 
 const userSession = new UserSession({ appConfig });
+
+function ProtectedRoute({ children, ...rest }) {
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        userSession.isUserSignedIn() ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location }
+            }}
+          />
+        )
+      }
+    />
+  );
+}
 
 class App extends React.Component {
   handleSignIn(e) {
@@ -26,6 +43,19 @@ class App extends React.Component {
     userSession.signUserOut(window.location.origin);
   }
 
+  componentWillMount() {
+    if (userSession.isSignInPending()) {
+      userSession.handlePendingSignIn().then(userData => {
+        if (!userData.username) {
+          throw new Error("This app requires a username.");
+        } else {
+          console.warn(userData.username);
+        }
+        window.location = window.location.origin;
+      });
+    }
+  }
+
   render() {
     return (
       <>
@@ -35,15 +65,20 @@ class App extends React.Component {
             path="/login"
             exact
             render={props => (
-              <Login {...props} handleSignIn={this.handleSignIn} />
+              <Login
+                {...props}
+                userSession={userSession}
+                handleSignIn={this.handleSignIn}
+              />
             )}
           />
-          <Route path="/register" exact component={Register} />
-          <Route path="/" exact render={props => (
-              <Main {...props} userSession={userSession} handleSignOut={ this.handleSignOut } />
-            )} />
+          <ProtectedRoute path="/" exact>
+            <Main
+              userSession={userSession}
+              handleSignOut={this.handleSignOut}
+            />
+          </ProtectedRoute>
         </Switch>
-        <Footer />
       </>
     );
   }

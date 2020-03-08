@@ -2,15 +2,14 @@ import React from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
-import Link from "@material-ui/core/Link";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
+
+import { Redirect } from "react-router-dom";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +46,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Login(props) {
   const classes = useStyles();
-  const { handleSignIn } = props;
+  const { userSession, handleSignIn } = props;
+
+  if (userSession.isUserSignedIn()) {
+    return <Redirect to={{ pathname: "/" }} />;
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -69,15 +72,8 @@ export default function Login(props) {
             className={classes.submit}
             onClick={handleSignIn.bind(this)}
           >
-            Sign In
+            Sign In with Blockstack
           </Button>
-          <Grid container justify="center">
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
           <Box mt={5}>
             <Typography variant="body2" color="textSecondary" align="center">
               Happy Gaming!
