@@ -126,7 +126,7 @@ export default function MainAppBar({
             {icons[selectedTab].name}
           </Typography>
           <IconButton>
-            <Icon className='fas fa-coins' style={{ color: 'orange' }} />
+            <Icon className='fas fa-gem' style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant='h6' style={{ marginRight: 12 }} noWrap>
             250
