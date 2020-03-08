@@ -62,24 +62,13 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
   const [incomeOpen, setIncomeOpen] = React.useState(false);
   const [expenseOpen, setExpenseOpen] = React.useState(false);
   const [tasksOpen, setTasksOpen] = React.useState(false);
-  const [incomes, setIncomes] = React.useState([]);
+  const [incomes, setIncomes] = React.useState([{ task: "Add your income!", amount: "0" }]);
+  const [expenses, setExpenses] = React.useState([]);
+  const [coins, setCoins] = React.useState([]);
   const [alert, setAlert] = React.useState(true);
-  const str = userSession.loadUserData().username
+  const str = userSession.loadUserData().username;
   const username = str.substring(0, str.length - 14);
   const usersRef = firebase.database().ref("user/" + username);
-
-  // usersRef.child(username).set({
-  //   income: [
-  //     { task: "collect changes", amount: 20 },
-  //     { task: "do housework", amount: 15 }
-  //   ],
-  //   expense: [
-  //     { name: "buy math textbook", spend: 100 },
-  //     { name: "buy a hoodie", spend: 50 }
-  //   ],
-  //   point: 200,
-  //   gold: 250
-  // });
 
   const toggleUp = () => setUp(!up);
 
@@ -153,7 +142,14 @@ export default function Main({ userSession = "No User", handleSignOut = () => { 
 
   useEffect(() => {
     usersRef.on('value', snapshot => {
-      console.log(snapshot.val().income)
+      if (snapshot.val() == null) {
+        firebase.database().ref("user").child(username).set({
+          income: [{ task: "Welcome!", amount: "0" }],
+          expense: [{ name: "Welcome!", spend: "0" }],
+          point: 200,
+          gold: 250
+        });
+      }
       setIncomes(snapshot.val().income);
     });
   }, []);

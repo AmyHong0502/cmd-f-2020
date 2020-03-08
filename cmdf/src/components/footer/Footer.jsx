@@ -22,7 +22,7 @@ export default function Footer() {
       >
         Happy Gaming!
         <br />
-        Built with ❤️ at cmd-f 2020
+        Crafted with ❤️ at cmd-f 2020
       </Typography>
     </footer>
   );
