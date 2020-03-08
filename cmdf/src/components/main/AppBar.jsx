@@ -7,11 +7,9 @@ import Button from "@material-ui/core/Button";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Drawer from '@material-ui/core/Drawer';
-import Fab from '@material-ui/core/Fab';
 import List from '@material-ui/core/List';
 import Icon from '@material-ui/core/Icon';
 import IconButton from '@material-ui/core/IconButton';
-import AddIcon from '@material-ui/icons/Add';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
@@ -20,7 +18,7 @@ import RedeemRoundedIcon from '@material-ui/icons/RedeemRounded';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ProgressChart from './ProgressChart';
+import ProgressChart from '../navigation/ProgressChart';
 
 const drawerWidth = 300;
 
@@ -52,11 +50,6 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between',
     padding: theme.spacing(8),
-  },
-  fab: {
-    position: 'fixed',
-    right: 30,
-    bottom: 30,
   },
   title: {
     flexGrow: 1,
@@ -162,18 +155,18 @@ export default function MainAppBar() {
             Dashboard
           </Typography>
           <IconButton>
-            <FavoriteRoundedIcon style={{ color: 'orange' }} />
+            <Icon className="fas fa-coins" style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant="h6" style={{ marginRight: 12 }} noWrap>
             250
           </Typography>
           <IconButton>
-            <RedeemRoundedIcon style={{ color: 'orange' }} />
+            <Icon className="fas fa-wallet" style={{ color: 'orange' }} />
           </IconButton>
           <Typography variant="h6" noWrap>
-            200.00
+            $200.00
           </Typography>
-          <Button style={{ color: 'orange', fontSize: '1.20rem', marginLeft: 10 }}>Sign Out</Button>
+          <Button variant="outlined" style={{ borderColor: 'white', color: 'white', fontSize: '1rem', marginLeft: 30 }}>Sign Out</Button>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -218,9 +211,6 @@ export default function MainAppBar() {
           </div>
           <ProgressChart />
         </div>
-        <Fab className={classes.fab} color="primary" aria-label="add">
-          <AddIcon />
-        </Fab>
       </div>
     </div>
   );
